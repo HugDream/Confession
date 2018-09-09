@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .content {
+            min-height: 100px;
+        }
+
+        .footer {
+            height: 54px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        .modal-dialog{
+            margin: auto;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 80%;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade custom" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body content" id="cnt">你是不是喜欢我?</div>
+                <div class="modal-footer footer" id="btns_super">
+                    <button id="btn" type="button" style="width:80px;background: cadetblue;color: white" onclick="modalYesClick()" class="btn btn-default">
+                    是 </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</body>
+<script>
+    var texts = [
+        {"cnt":"亲爱的李先生，你好","btn":"确认"},
+        {"cnt":"今天是9月18日，其实是个欢乐的日子~！","btn":"确认"},
+        {"cnt":"当当当！这有一份1994年9月18日的人民日报，对！就是你出生那天！请查收！","btn":"已查收"},
+        {"cnt":"此之外……再来看点别的吧！","btn":"确认"},
+        {"cnt":"53年9月18日，罗马帝国安敦尼王朝皇帝图拉真出生","btn":"确认","music":true},
+        {"cnt":"1606年9月18日，明末农民起义领袖张献忠出生","btn":"确认"},
+        {"cnt":"1947年9月18日，美国中央情报局成立","btn":"确认"},
+        {"cnt":"1994年9月18日，宇宙超级厉害超帅气超可爱超机智超棒的成功企业家李天罡先生出生","btn":"对"},
+        {"cnt":"2018年9月18日……李天罡先生终于迎来了和某位世界无敌超级小可爱度过的第一个生日","btn":"超级开心、开心、海星"},
+        {"cnt":"看，这儿还有一本小王子（3D版）","btn":"确认"},
+        {"cnt":"其实这才是想送给你的礼物，因为前段时间看罗振宇的节目有提到，又忽然想起来……这本我一直想买的书已经在购物车里躺了两年了。","btn":"确认"},
+        {"cnt":"小狐狸：“如果你驯服了我，我会立刻感到生活充满阳光。我会分辨出你与众不同的脚步声，你乐曲一样的脚步声，不但不会让我怕得钻进洞里，反倒会把我召唤到洞外。看到那片麦田了吗？以前我对麦子一点兴趣都没有，因为我不吃面包，它对我没用。但如果你驯养了我，看到麦子橙黄的色泽，我就会想起你金色的头发……","btn":"确认"},
+        {"cnt":"所以，我总是能在生活的各个角落想起我们相处的日子，每件小事都能想起你。那，请在未来漫长的时光里，让慢慢的彼此“驯养”吧。","btn":"确认"},
+        {"cnt":"小王子：“我有一朵玫瑰花，即使她和你们都一样，可在我眼里，她胜过你们所有的花儿，因为我曾给她浇水，给她盖风罩，她身上的毛虫我也仔细给她除去，她的抱怨和自诩都曾在我耳边飘荡，我甚至听得见她得沉默，因为她是我的花儿啊“","btn":"确认"},
+        {"cnt":"小狐狸说：“因为你的花儿花费了你的时间，所以她才变得很重要。“","btn":"确认"},
+        {"cnt":"我想我们也可以慢慢走过这样的日子，只是与我们而言，这段时光显得尤为珍贵。这样的话，也就更重要了。","btn":"确认"},
+        {"cnt":"如果有人钟爱着一朵独一无二的，盛开在浩瀚星海里的花。那么，当他抬头仰望星空时，便会心满意足。他会告诉自己：“我心爱的花在那里，在那颗遥远的星星上。","btn":"确认"},
+        {"cnt":"所以在这无聊的前四分之一的人生里遇到你，我才知道对我而言真的有这么一朵独一无二的花在某个遥远星空存在。","btn":"确认"},
+        {"cnt":"并且在以后的很长时间，你都会是我走在路上突然笑出声来的缘由，也感谢你让我进步，让我看到更多不一样的东西。感谢遇见。","btn":"确认"},
+        {"cnt":"希望你天天开心，永远可爱，万事顺意","btn":"确认"},
+        {"cnt":"24岁生日快乐，天罡💗","btn":""},
+    ];
+    var current_idx = 0;
+    $(function () {
+        refreshModal();
+        $("#myModal").modal({ backdrop: 'static', keyboard: false });
+    });
+    $('#myModal').on('hidden.bs.modal', function () {
+        refreshModal();
+        if(current_idx <= texts.length){
+            $("#myModal").modal({ backdrop: 'static', keyboard: false });
+        }
+    })
+    function modalYesClick(){
+        $("#myModal").modal('hide')
+    }
+    function refreshModal(){
+        if(current_idx < texts.length){
+            $("#cnt").html(texts[current_idx]["cnt"]);
+            $("#btn").html(texts[current_idx]["btn"]);
+            if(texts.length - 1 == current_idx){
+                $("#btns_super").remove();
+            }
+        }
+        current_idx++;
+    }
+</script>
+
+</html>
