@@ -38,10 +38,16 @@
             width: 80%;
             align-items: center;
         }
+       .body{
+            background:url(background.jpg)  no-repeat center center;
+            background-size:cover;
+            background-attachment:fixed;
+            background-color:#CCCCCC;
+        }
     </style>
 </head>
 
-<body>
+<body class="body">
     <!-- 模态框（Modal） -->
     <div class="modal fade custom" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -80,29 +86,4 @@
         {"cnt":"24岁生日快乐，天罡💗","btn":""},
     ];
     var current_idx = 0;
-    $(function () {
-        refreshModal();
-        $("#myModal").modal({ backdrop: 'static', keyboard: false });
-    });
-    $('#myModal').on('hidden.bs.modal', function () {
-        refreshModal();
-        if(current_idx <= texts.length){
-            $("#myModal").modal({ backdrop: 'static', keyboard: false });
-        }
-    })
-    function modalYesClick(){
-        $("#myModal").modal('hide')
-    }
-    function refreshModal(){
-        if(current_idx < texts.length){
-            $("#cnt").html(texts[current_idx]["cnt"]);
-            $("#btn").html(texts[current_idx]["btn"]);
-            if(texts.length - 1 == current_idx){
-                $("#btns_super").remove();
-            }
-        }
-        current_idx++;
-    }
-</script>
-
-</html>
+    $
