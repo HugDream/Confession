@@ -60,7 +60,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-     <div id="bgmvideo"></div>
 </body>
 <script>
     var texts = [
@@ -111,16 +110,6 @@
         }
         current_idx++;
     }
-       // session控制音乐
-    $(document).ready(function () {
-            if (!sessionStorage.getItem("bgm")) {
-                 $("#bgmvideo").append(
-                    '<audio src="test.mp3" autoplay hidden></audio>'
-                );
-                sessionStorage.setItem("bgm", 1)
-            }
-        })
 </script>
-<!-- <embed src="test.mp3" mautostart=true width=0 height=0  loop="2"> -->
 </html>
 
